@@ -14,7 +14,7 @@ http://localhost:9200/bookIndex
 
 2.put 请求创建bookType与mapping
 
-http://localhost:9200/bookIndex
+http://localhost:9200/bookindex
 {
 	"mappings": {
 		"booktype": {
