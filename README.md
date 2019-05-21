@@ -108,7 +108,9 @@ lte 小于等于
 
 
 
-post 组合查询模板
+###### post 组合查询模板
+```
+
 http://localhost:9200/bookindex/booktype/_search?pretty
 {
 	"query":{
@@ -121,3 +123,16 @@ http://localhost:9200/bookindex/booktype/_search?pretty
 }
 
 ```
+
+
+##### elasticsearch中term与match区别  https://blog.csdn.net/sxf_123456/article/details/78845437
+
+    match是模糊查询
+    term是精确查询
+
+
+     1.term是代表完全匹配，也就是精确查询，搜索前不会再对搜索词进行分词，所以我们的搜索词必须是文档分词集合中的一个
+
+     2.match
+       前面提到match搜索会先对搜索词进行分词，对于最基本的match搜索来说，
+       只要搜索词的分词集合中的一个或多个存在于文档中即可
