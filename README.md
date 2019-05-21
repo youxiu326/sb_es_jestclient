@@ -156,3 +156,95 @@ term精确搜索
 链接：https://www.jianshu.com/p/eb30eee13923
 来源：简书
 ```
+
+
+```
+http://localhost:9200/bookindex/booktype/_search?pretty
+{
+	"query":{
+		"bool":{
+			"must":     {
+				"term":{"name":"悲惨世界"}
+			},
+        	"must_not": {
+
+        	},
+        	"should": [
+        		{"range":{"price":{"lte":"30"}}}
+
+        	]
+		}
+	}
+}
+
+or boost
+
+{
+	"query":{
+		"bool":{
+			"must":     {
+				"term":{"name":"悲惨世界"}
+			},
+        	"must_not": {
+
+        	},
+        	"should": [
+        		{
+        			"range":{
+        				"price":{"lte":"30","boost": 10.0}
+        			}
+        		}
+        	]
+		}
+	}
+}
+
+
+______result
+
+{
+    "took": 33,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": 2,
+        "max_score": 1.2531602,
+        "hits": [
+            {
+                "_index": "bookindex",
+                "_type": "booktype",
+                "_id": "1",
+                "_score": 1.2531602,
+                "_source": {
+                    "id": 1,
+                    "createTime": "2019-05-21 13:30:48",
+                    "name": "悲惨世界",
+                    "code": "001",
+                    "price": 20.1,
+                    "autoOnLineDate": "2019-05-21 05:30:48"
+                }
+            },
+            {
+                "_index": "bookindex",
+                "_type": "booktype",
+                "_id": "2",
+                "_score": 0.26742277,
+                "_source": {
+                    "id": 2,
+                    "createTime": "2019-05-21 13:30:48",
+                    "name": "动物世界与悲惨世界",
+                    "code": "002",
+                    "price": 40.1,
+                    "autoOnLineDate": "2019-05-21 05:30:48"
+                }
+            }
+        ]
+    }
+}
+
+```
